@@ -28,7 +28,6 @@ function ImageInput({ onUpload }: ImageInputProps) {
         onChange={handleChange}
       />
       <p className={styles.text}>Upload an Image</p>
-      {imageUrl && <img src={imageUrl} />}
     </label>
   );
 }
