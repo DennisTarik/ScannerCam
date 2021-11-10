@@ -1,0 +1,21 @@
+.input {
+  background: var(--color-primary);
+  font-size: 2rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  align-self: center;
+  display: none;
+}
+
+.text {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  background: var(--color-primary);
+  font-size: 1.5rem;
+  height: 2.5rem;
+  width: 16rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem;
+}

@@ -5,9 +5,9 @@
 }
 
 :root {
-  --color-primary: red;
-  --color-secondary: green;
-  --color-background: black;
+  --color-primary: #00d1ff;
+  --color-secondary: #00d1ff60;
+  --color-accept: #3cee44;
 }
 
 body {

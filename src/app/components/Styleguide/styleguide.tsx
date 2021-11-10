@@ -35,7 +35,7 @@ function Styleguide() {
             style={{
               width: 61,
               height: 61,
-              background: 'var(--color-background)',
+              background: 'var(--color-accept)',
               borderRadius: '50%',
             }}
           />
