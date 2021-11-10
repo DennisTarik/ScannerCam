@@ -1,11 +1,21 @@
 .container {
   display: grid;
+  grid-template-rows: 20% 50% 15% 15%;
   place-items: center;
   gap: 1rem;
 }
 
 .icon {
-  height: 20rem;
+  height: 18rem;
+}
+
+.upload {
+  width: 80vw;
+}
+
+.title {
+  font-size: 4rem;
+  margin: 0;
 }
 
 .scan {
@@ -19,4 +29,10 @@
   border-radius: 1rem;
   padding: 2rem;
   margin: 0.5rem;
+}
+
+.p {
+  overflow: scroll;
+  font-size: 2rem;
+  height: 30vh;
 }
