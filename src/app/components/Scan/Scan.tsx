@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import ImageInput from '../../components/ImageInput/ImageInput';
 import styles from './Scan.module.css';
-import Tesseract from 'tesseract.js';
+import { recognizeText, RecognizeProgress } from '../../utils/ocr';
+import Progress from '../../components/Progress/Progress';
 
-function Scan() {
+function Scan(): JSX.Element {
   const [imageURL, setImageURL] = useState<string | null>(null);
   const [recognizedText, setRecognizedText] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
+  const [recognizedProgress, setRecognizedProgress] =
+    useState<RecognizeProgress | null>(null);
   let content;
 
   if (recognizedText) {
@@ -27,24 +29,26 @@ function Scan() {
       <p className={styles.title}>ScanCam</p>
       {content}
       <ImageInput onUpload={setImageURL} />
-      <button
-        disabled={imageURL === null}
-        className={styles.scan}
-        onClick={() => {
-          if (imageURL) {
-            Tesseract.recognize(imageURL, 'eng', {
-              logger: (message) =>
-                message.status === 'recognizing text' &&
-                setProgress(message.progress.toFixed(2)),
-            }).then((result) => {
-              const text = result.data.text;
-              setRecognizedText(text);
-            });
-          }
-        }}
-      >
-        Scan an Image
-      </button>
+      {recognizedProgress ? (
+        <Progress
+          progress={recognizedProgress.progress * 100}
+          status={recognizedProgress.status}
+        />
+      ) : (
+        <button
+          disabled={imageURL === null}
+          className={styles.scan}
+          onClick={() => {
+            if (imageURL) {
+              recognizeText(imageURL, setRecognizedProgress).then(
+                setRecognizedText
+              );
+            }
+          }}
+        >
+          Scan an Image
+        </button>
+      )}
       <a href="#" className={styles.documents}>
         Saved documents
       </a>
