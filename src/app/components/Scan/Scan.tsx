@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import ImageInput from '../../components/ImageInput/ImageInput';
 import styles from './Scan.module.css';
-import { recognizeText, RecognizeProgress } from '../../utils/ocr';
+import useRecognizeText from '../../utils/useRecognizeText';
 import Progress from '../../components/Progress/Progress';
 import AddDocumentForm from '../../components/AddDocumentForm/AddDocumentForm';
 
 function Scan(): JSX.Element {
   const [imageURL, setImageURL] = useState<string | null>(null);
-  const [recognizedText, setRecognizedText] = useState<string | null>(null);
-  const [recognizedProgress, setRecognizedProgress] =
-    useState<RecognizeProgress | null>(null);
+  const { text, progress, recognize } = useRecognizeText();
   let content;
 
-  if (recognizedText) {
-    content = <p className={styles.p}>{recognizedText}</p>;
+  if (text) {
+    content = <p className={styles.p}>{text}</p>;
   } else if (imageURL) {
     content = <img className={styles.upload} src={imageURL} />;
   } else {
@@ -30,26 +28,18 @@ function Scan(): JSX.Element {
       <p className={styles.title}>ScanCam</p>
       {content}
       <ImageInput onUpload={setImageURL} />
-      {recognizedProgress ? (
-        <div>
-          {recognizedText && <AddDocumentForm text={recognizedText} />}
-
-          {!recognizedText && recognizedProgress && (
-            <Progress
-              progress={recognizedProgress.progress * 100}
-              status={recognizedProgress.status}
-            />
-          )}
-        </div>
+      {!text && progress && (
+        <Progress progress={progress.progress} status={progress.status} />
+      )}
+      {text ? (
+        <div>{text && <AddDocumentForm text={text} />}</div>
       ) : (
         <button
           disabled={imageURL === null}
           className={styles.scan}
           onClick={() => {
             if (imageURL) {
-              recognizeText(imageURL, setRecognizedProgress).then(
-                setRecognizedText
-              );
+              recognize(imageURL);
             }
           }}
         >
