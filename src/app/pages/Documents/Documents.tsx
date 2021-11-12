@@ -1,8 +1,15 @@
 import React from 'react';
-import DocPreview from '../../components/DocPreview/DocPreview';
+import DocumentList from '../../components/DocPreview/DocPreview';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import styles from './Documents.module.css';
 
 function Documents(): JSX.Element {
-  return <DocPreview title="DocPreview" text="Hallo" />;
+  return (
+    <div className={styles.container}>
+      <SearchBar />
+      <DocumentList />
+    </div>
+  );
 }
 
 export default Documents;

@@ -1,33 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import getDocuments from '../../utils/fetchDocuments';
 import styles from './DocPreview.module.css';
 
-type DocPreviewProps = {
+type Document = {
+  id: number;
   title: string;
   text: string;
 };
 
-export default function DocPreview({
-  title,
-  text,
-}: DocPreviewProps): JSX.Element {
+export default function DocumentList(): JSX.Element {
+  const [documents, setDocuments] = useState<null | Document[]>(null);
+  useEffect(() => {
+    async function load() {
+      const newDocuments = await getDocuments();
+      setDocuments(newDocuments);
+    }
+    load();
+  }, []);
   return (
-    <div className={styles.body}>
-      <article className={styles.document}>
-        <h2 className={styles.h2}>{title}</h2>
-        <p>{text}</p>
-      </article>
-      <article className={styles.document}>
-        <h2 className={styles.h2}>{title}</h2>
-        <p>{text}</p>
-      </article>
-      <article className={styles.document}>
-        <h2 className={styles.h2}>{title}</h2>
-        <p>{text}</p>
-      </article>
-      <article className={styles.document}>
-        <h2 className={styles.h2}>{title}</h2>
-        <p>{text}</p>
-      </article>
-    </div>
+    <section>
+      {documents &&
+        documents.slice(0, 5).map((document) => (
+          <article className={styles.doc} key={document.id}>
+            <p>{document.text}</p>
+          </article>
+        ))}
+    </section>
   );
 }
