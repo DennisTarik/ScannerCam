@@ -11,9 +11,23 @@ export default function DocPreview({
   text,
 }: DocPreviewProps): JSX.Element {
   return (
-    <article>
-      <h2 className={styles.h2}>{title}</h2>
-      <p>{text}</p>
-    </article>
+    <div className={styles.body}>
+      <article className={styles.document}>
+        <h2 className={styles.h2}>{title}</h2>
+        <p>{text}</p>
+      </article>
+      <article className={styles.document}>
+        <h2 className={styles.h2}>{title}</h2>
+        <p>{text}</p>
+      </article>
+      <article className={styles.document}>
+        <h2 className={styles.h2}>{title}</h2>
+        <p>{text}</p>
+      </article>
+      <article className={styles.document}>
+        <h2 className={styles.h2}>{title}</h2>
+        <p>{text}</p>
+      </article>
+    </div>
   );
 }
