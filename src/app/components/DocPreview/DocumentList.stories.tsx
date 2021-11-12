@@ -1,5 +1,5 @@
 import React from 'react';
-import DocumentList from './DocPreview';
+import DocumentList from './DocumentList';
 
 export default { component: DocumentList, title: 'Components/DocPreview' };
 
