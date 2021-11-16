@@ -1,0 +1,22 @@
+.search {
+  position: relative;
+}
+
+.search::before {
+  content: '🔍';
+  font-size: 0.9em;
+  position: absolute;
+  left: 3px;
+}
+
+.search input {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.clear {
+  position: absolute;
+  right: 10px;
+  font-size: 0.9em;
+  color: black;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import DocumentList from '../../components/DocPreview/DocumentList';
+import DocumentList from '../../components/DocumentList/DocumentList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import styles from './Documents.module.css';
 
